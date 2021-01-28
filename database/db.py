@@ -5,13 +5,13 @@ from decouple import config
 
 APP_MODE = config('FLASK_ENV')
 DATABASE_HOST = config('DATABASE_HOST')
-DATABASE_NAME = config('DATABASE_NAME')
+DATABASE_SERVER_NAME = config('DATABASE_NAME')
 DATABASE_USER = config('DATABASE_USER')
 DATABASE_PASSWORD = config('DATABASE_PASSWORD')
 
 print(APP_MODE)
 print(DATABASE_HOST)
-print(DATABASE_NAME)
+print(DATABASE_SERVER_NAME)
 print(DATABASE_PASSWORD)
 print(DATABASE_USER)
 
@@ -67,6 +67,20 @@ mydb = mysql.connector.connect(
   username=DATABASE_USER,
   password=DATABASE_PASSWORD
 )
+
+if (APP_MODE == 'development'):
+  mydb = mysql.connector.connect(
+    host=DATABASE_HOST,
+    username=DATABASE_USER,
+    password=DATABASE_PASSWORD
+  )
+else:
+  mydb = mysql.connector.connect(
+    host=DATABASE_HOST,
+    username=DATABASE_USER,
+    password=DATABASE_PASSWORD,
+    database=DATABASE_SERVER_NAME
+  )
 
 DATABASE_NAME = 'blockchain'
 mycursor = mydb.cursor()
