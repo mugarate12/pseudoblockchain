@@ -27,6 +27,21 @@ def create_table_products(database_cursor):
       have_table = True
       break
 
+  print(f'CREATE TABLE {TABLE_NAME} '
+                            '(hash VARCHAR(255) PRIMARY KEY,'
+                            'process_id INT NOT NULL,'
+                            'nonce INT NOT NULL,'
+                            'num_block INT NOT NULL,'
+                            'tipo VARCHAR(30) NOT NULL,'
+                            'quantidade_em_litros INT,'
+                            'ITGU INT,'
+                            'localizacao VARCHAR(255),'
+                            'temperatura FLOAT,'
+                            'data VARCHAR(255),'
+                            'qualidade_do_produto INT,'
+                            'lote VARCHAR(255),'
+                            'product_id VARCHAR(255))')
+
   if not have_table:
     database_cursor.execute(f'CREATE TABLE {TABLE_NAME} '
                             '(hash VARCHAR(255) PRIMARY KEY,'
