@@ -9,11 +9,26 @@ DATABASE_SERVER_NAME = config('DATABASE_NAME')
 DATABASE_USER = config('DATABASE_USER')
 DATABASE_PASSWORD = config('DATABASE_PASSWORD')
 
-print(APP_MODE)
-print(DATABASE_HOST)
-print(DATABASE_SERVER_NAME)
-print(DATABASE_PASSWORD)
-print(DATABASE_USER)
+
+def getMyDb():
+  if APP_MODE == 'development':
+    mydb = mysql.connector.connect(
+      host='localhost',
+      username='root',
+      password='majuge123',
+      database=DATABASE_NAME
+    )
+  else:
+    mydb = mysql.connector.connect(
+      host=DATABASE_HOST,
+      username=DATABASE_USER,
+      password=DATABASE_PASSWORD,
+      database=DATABASE_SERVER_NAME,
+      use_pure=True,
+      ssl_disabled=True
+    )
+
+  return mydb
 
 
 def create_table_products(database_cursor):
@@ -65,7 +80,7 @@ def create_table_users(database_cursor):
 
 mydb = None
 
-if (APP_MODE == 'development'):
+if APP_MODE == 'development':
   mydb = mysql.connector.connect(
     host=DATABASE_HOST,
     username=DATABASE_USER,
@@ -118,38 +133,3 @@ else:
   mycursor = mydb.cursor()
   create_table_products(mycursor)
   create_table_users(mycursor)
-
-# DATABASE_NAME = 'blockchain'
-# mycursor = mydb.cursor()
-# mycursor.execute('Show Databases')
-#
-# have_a_database = False
-# for name_of_database in mycursor:
-#   if name_of_database[0] == DATABASE_NAME:
-#     have_a_database = True
-#     break
-#
-# if have_a_database:
-#   mydb = mysql.connector.connect(
-#     host='localhost',
-#     username='root',
-#     password='majuge123',
-#     database=DATABASE_NAME
-#   )
-#
-#   mycursor = mydb.cursor()
-#   create_table_products(mycursor)
-#   create_table_users(mycursor)
-#
-# else:
-#   mycursor.execute(f'CREATE DATABASE {DATABASE_NAME}')
-#   mydb = mysql.connector.connect(
-#     host='localhost',
-#     username='root',
-#     password='majuge123',
-#     database=DATABASE_NAME
-#   )
-#
-#   mycursor = mydb.cursor()
-#   create_table_products(mycursor)
-#   create_table_users(mycursor)

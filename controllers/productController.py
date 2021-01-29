@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, request
 
-from database.db import mydb
+from database.db import getMyDb
 from models.block import Block
 from models.blockchain import BlockChain
 
@@ -123,6 +123,7 @@ class Product(Resource):
       return self.get_product_by_process_id(process_id)
 
   def post(self):
+    mydb = getMyDb()
     parser = reqparse.RequestParser()
     mycursor = mydb.cursor(buffered=True)
     blockchain = BlockChain()
