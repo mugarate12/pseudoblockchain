@@ -62,11 +62,7 @@ def create_table_users(database_cursor):
                             'senha VARCHAR(255) NOT NULL,'
                             'tipo VARCHAR(255)) NOT NULL')
 
-mydb = mysql.connector.connect(
-  host=DATABASE_HOST,
-  username=DATABASE_USER,
-  password=DATABASE_PASSWORD
-)
+mydb = None
 
 if (APP_MODE == 'development'):
   mydb = mysql.connector.connect(
