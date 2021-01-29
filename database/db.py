@@ -70,6 +70,41 @@ if (APP_MODE == 'development'):
     username=DATABASE_USER,
     password=DATABASE_PASSWORD
   )
+
+  DATABASE_NAME = 'blockchain'
+  mycursor = mydb.cursor()
+  mycursor.execute('Show Databases')
+
+  have_a_database = False
+  for name_of_database in mycursor:
+    if name_of_database[0] == DATABASE_NAME:
+      have_a_database = True
+      break
+
+  if have_a_database:
+    mydb = mysql.connector.connect(
+      host='localhost',
+      username='root',
+      password='majuge123',
+      database=DATABASE_NAME
+    )
+
+    mycursor = mydb.cursor()
+    create_table_products(mycursor)
+    create_table_users(mycursor)
+
+  else:
+    mycursor.execute(f'CREATE DATABASE {DATABASE_NAME}')
+    mydb = mysql.connector.connect(
+      host='localhost',
+      username='root',
+      password='majuge123',
+      database=DATABASE_NAME
+    )
+
+    mycursor = mydb.cursor()
+    create_table_products(mycursor)
+    create_table_users(mycursor)
 else:
   mydb = mysql.connector.connect(
     host=DATABASE_HOST,
@@ -79,38 +114,41 @@ else:
     use_pure=True,
     ssl_disabled=True
   )
-
-DATABASE_NAME = 'blockchain'
-mycursor = mydb.cursor()
-mycursor.execute('Show Databases')
-
-have_a_database = False
-for name_of_database in mycursor:
-  if name_of_database[0] == DATABASE_NAME:
-    have_a_database = True
-    break
-
-if have_a_database:
-  mydb = mysql.connector.connect(
-    host='localhost',
-    username='root',
-    password='majuge123',
-    database=DATABASE_NAME
-  )
-
   mycursor = mydb.cursor()
   create_table_products(mycursor)
   create_table_users(mycursor)
 
-else:
-  mycursor.execute(f'CREATE DATABASE {DATABASE_NAME}')
-  mydb = mysql.connector.connect(
-    host='localhost',
-    username='root',
-    password='majuge123',
-    database=DATABASE_NAME
-  )
-
-  mycursor = mydb.cursor()
-  create_table_products(mycursor)
-  create_table_users(mycursor)
+# DATABASE_NAME = 'blockchain'
+# mycursor = mydb.cursor()
+# mycursor.execute('Show Databases')
+#
+# have_a_database = False
+# for name_of_database in mycursor:
+#   if name_of_database[0] == DATABASE_NAME:
+#     have_a_database = True
+#     break
+#
+# if have_a_database:
+#   mydb = mysql.connector.connect(
+#     host='localhost',
+#     username='root',
+#     password='majuge123',
+#     database=DATABASE_NAME
+#   )
+#
+#   mycursor = mydb.cursor()
+#   create_table_products(mycursor)
+#   create_table_users(mycursor)
+#
+# else:
+#   mycursor.execute(f'CREATE DATABASE {DATABASE_NAME}')
+#   mydb = mysql.connector.connect(
+#     host='localhost',
+#     username='root',
+#     password='majuge123',
+#     database=DATABASE_NAME
+#   )
+#
+#   mycursor = mydb.cursor()
+#   create_table_products(mycursor)
+#   create_table_users(mycursor)
