@@ -27,8 +27,10 @@ def create_table_products(database_cursor):
       have_table = True
       break
 
+  # CREATE TABLE IF NOT EXISTS
+
   print(f'CREATE TABLE {TABLE_NAME} '
-                            '(hash VARCHAR(255) PRIMARY KEY,'
+                            '(hash VARCHAR(255) NOT NULL PRIMARY KEY,'
                             'process_id INT NOT NULL,'
                             'nonce INT NOT NULL,'
                             'num_block INT NOT NULL,'
