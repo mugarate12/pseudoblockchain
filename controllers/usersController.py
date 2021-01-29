@@ -1,13 +1,14 @@
 from flask_restful import Resource, reqparse, request
 import bcrypt
 
-from database.db import mydb
+from database.db import getMyDb
 
 
 class User(Resource):
   TABLE_NAME = 'usuarios'
 
   def get(self):
+    mydb = getMyDb()
     mycursor = mydb.cursor(buffered=True)
 
     email = request.args.get('email')
@@ -48,6 +49,7 @@ class User(Resource):
 
   def post(self):
     parser = reqparse.RequestParser()
+    mydb = getMyDb()
     mycursor = mydb.cursor(buffered=True)
 
     parser.add_argument('email')

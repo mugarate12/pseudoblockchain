@@ -8,6 +8,7 @@ from models.blockchain import BlockChain
 class Product(Resource):
 
   def get_product_by_process_id(self, process_id):
+    mydb = getMyDb()
     mycursor = mydb.cursor(buffered=True)
     TABLE_NAME = 'produtos'
 
@@ -56,6 +57,7 @@ class Product(Resource):
            }, 200
 
   def get_product_by_product_id(self, product_id):
+    mydb = getMyDb()
     mycursor = mydb.cursor(buffered=True)
     TABLE_NAME = 'produtos'
 
