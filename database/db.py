@@ -79,7 +79,8 @@ else:
     host=DATABASE_HOST,
     username=DATABASE_USER,
     password=DATABASE_PASSWORD,
-    database=DATABASE_SERVER_NAME
+    database=DATABASE_SERVER_NAME,
+    use_pure=True
   )
 
 DATABASE_NAME = 'blockchain'
