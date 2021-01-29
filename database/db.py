@@ -46,11 +46,11 @@ def create_table_products(database_cursor):
 
   if not have_table:
     database_cursor.execute(f'CREATE TABLE {TABLE_NAME} '
-                            '(hash VARCHAR(255) NOT NULL PRIMARY KEY,'
-                            'process_id INT NOT NULL,'
-                            'nonce INT NOT NULL,'
-                            'num_block INT NOT NULL,'
-                            'tipo VARCHAR(30) NOT NULL,'
+                            '(hash VARCHAR(255) PRIMARY KEY,'
+                            'process_id INT,'
+                            'nonce INT,'
+                            'num_block INT,'
+                            'tipo VARCHAR(30),'
                             'quantidade_em_litros INT,'
                             'ITGU INT,'
                             'localizacao VARCHAR(255),'
@@ -133,7 +133,7 @@ else:
   )
   mycursor = mydb.cursor()
   create_table_products(mycursor)
-  create_table_users(mycursor)
+  # create_table_users(mycursor)
 
 # DATABASE_NAME = 'blockchain'
 # mycursor = mydb.cursor()
