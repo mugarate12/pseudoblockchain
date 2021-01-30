@@ -29,6 +29,7 @@ class Product(Resource):
           'localizacao': block[7],
           'temperatura': block[8],
           'ITGU': block[6],
+          'data': block[9],
           'tipo': block[4]
         })
       elif block[4] == 'transporte':
@@ -89,6 +90,7 @@ class Product(Resource):
           'localizacao': block[7],
           'temperatura': block[8],
           'ITGU': block[6],
+          'data': block[9],
           'tipo': block[4]
         })
       elif block[4] == 'transporte':
